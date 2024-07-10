@@ -6,8 +6,16 @@ module.exports.GetRequestsBlockOne = (fastify, options, done) => {
   fastify.get(
     '/GetReqOne',
     { schema: schemas.responseSchemaGetReqOne },
-    (request, reply) => {
-      reply.send({ message: 'Hello from roomOne' });
+    async (request, reply) => {
+      try {
+        const [rows, fields] = await fastify.mysql.query(
+          'SELECT * FROM Weapons'
+        );
+        console.log('🚀 ~ handler: ~ rows:', rows);
+        reply.send({ weapons: rows });
+    } catch (error) {
+      console.log('🚀 ~ handler: ~ error:', error);
+    }
     }
   );
   done();
