@@ -62,6 +62,7 @@ module.exports.getRoutesBlockOne = (fastifyApp) => {
       	done();
     	},
     	handler: (request, reply) => {
+        try{
       	request.log.info(
      
         { paramValue: request.params.name },
@@ -69,6 +70,10 @@ module.exports.getRoutesBlockOne = (fastifyApp) => {
       );
       const ad = request.params.name;
       reply.send({ helloFromQueryParams: ad });
+    } catch (error) {
+      console.log("🚀 ~ error:", error)
+      return error;
+    }
     },
   });
   };

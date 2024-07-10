@@ -1,0 +1,4 @@
+
+### request sample one
+
+GET http://localhost:3000/roomOne/GetReqTwo HTTP/1.1

@@ -1,5 +1,9 @@
 const { schemas } = require('../Schemas/schemas');
-
+const {getReqTwoHandlerOne} = require('../handlers/getReqTwoHandlers')
+const getReqTwoObjs = {
+  schema: schemas.responseSchemaGetReqOne,
+  handler: getReqTwoHandlerOne,
+};
 module.exports.GetRequestsBlockOne = (fastify, options, done) => {
   //  to access this http://localhost:3000/roomOne/GetReqOne
   // specifying response schema makes the fastify faster
@@ -13,10 +17,13 @@ module.exports.GetRequestsBlockOne = (fastify, options, done) => {
         );
         console.log('🚀 ~ handler: ~ rows:', rows);
         reply.send({ weapons: rows });
-    } catch (error) {
-      console.log('🚀 ~ handler: ~ error:', error);
-    }
+      } catch (error) {
+        console.log('🚀 ~ handler: ~ error:', error);
+        return error;
+      }
     }
   );
+
+  fastify.get('/GetReqTwo', getReqTwoObjs);
   done();
 };
