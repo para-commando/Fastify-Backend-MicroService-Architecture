@@ -1,0 +1,14 @@
+
+### request sample one
+
+GET http://localhost:3000/roomOne/GetReqTwo HTTP/1.1
+
+
+### request sample two
+
+POST http://localhost:3000/postReqOne HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Commando One"
+}
