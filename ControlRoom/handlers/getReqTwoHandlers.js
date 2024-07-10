@@ -1,6 +1,6 @@
 module.exports.getReqTwoHandlerOne = (request, reply) => {
   try {
-    reply.send({
+    reply.code(201).send({
       weapons: [
         {
           id: 1,

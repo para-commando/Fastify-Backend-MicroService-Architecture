@@ -76,4 +76,46 @@ module.exports.getRoutesBlockOne = (fastifyApp) => {
     }
     },
   });
+  fastifyApp.route({
+    method: 'POST',
+    url: '/postReqOne',
+    schema: {
+      // request needs to have a querystring with a `name` parameter
+      body: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+        },
+        required: ['name'],
+      },
+      // the response needs to be an object with an `hello` property of type 'string'
+      response: {
+        200: {
+          type: 'object',
+          properties: {
+            reqBody: { type: 'string' },
+          },
+        },
+      },
+    },
+    // this function is executed for every request before the handler is executed
+    preHandler: (request, reply, done) => {
+      // E.g. check authentication
+      done();
+    },
+    handler: (request, reply) => {
+      try{
+      request.log.info(
+   
+      { reqBody: request.body },
+      ' 🚀 request.params.name'
+    );
+ 
+    reply.send({ reqBody: request.body.name });
+  } catch (error) {
+    console.log("🚀 ~ error:", error)
+    return error;
+  }
+  },
+});
   };
